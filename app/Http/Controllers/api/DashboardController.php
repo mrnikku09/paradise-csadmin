@@ -124,6 +124,33 @@ class DashboardController extends Controller
 
     }
 
+    public function product()
+    {
+         $productData=CsProduct::orderBy('product_id','ASC')->where('product_status',1)->get();
+        $productImage=env('PRODUCT_IMAGE');
+        return response(["status" => 'success','PRODUCT_IMAGE_PATH'=>$productImage ,"productData" => $productData], 201);
+    }
 
+    public function productDetails(Request $request)
+    {
+        $validator=Validator::make($request->all(),[
+            'product_slug'=>'required',
+            
+        ]);
+        if($validator->fails())
+        {
+            return response(["status" => 'error', "message" => 'Product is not available'], 201);
+        }
+
+        $productDetails=CsProduct::where('product_status',1)->where('product_slug',$request->product_slug)->first();
+        $productImage=env('PRODUCT_IMAGE');
+        if($productDetails)
+        {
+            return response(["status" => 'success', 'PRODUCT_IMAGE_PATH'=>$productImage ,"productDetails" => $productDetails], 201);
+            
+        }else{            
+            return response(["status" => 'error', 'message'=>'somthing went wrong'], 201);
+        }
+    }
 
 }

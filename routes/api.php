@@ -22,4 +22,6 @@ use Illuminate\Support\Facades\Route;
     Route::post('/contact-process', [App\Http\Controllers\api\DashboardController::class, 'contactprocess']);
     Route::get('/slider-banner', [App\Http\Controllers\api\DashboardController::class, 'sliderbanner']);
     Route::get('/faq', [App\Http\Controllers\api\DashboardController::class, 'faq']);
+    Route::get('/product', [App\Http\Controllers\api\DashboardController::class, 'product']);
+    Route::post('/product-details', [App\Http\Controllers\api\DashboardController::class, 'productDetails']);
     // Route::get('/page-data', [App\Http\Controllers\api\DashboardController::class, 'footer']);

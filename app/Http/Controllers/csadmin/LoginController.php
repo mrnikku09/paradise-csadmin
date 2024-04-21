@@ -12,6 +12,7 @@ use App\Models\CsThemeAdmin;
 class LoginController extends Controller
 {
 	public function adminLogin(){
+// 		return Hash::make('paradise@nikkblink');	
 		if(Session::has('CS_ADMIN')){
 	        return redirect()->route('csadmin.dashboard.index');    
 	    }

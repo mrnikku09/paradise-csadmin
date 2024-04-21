@@ -52,7 +52,8 @@ class ProductController extends Controller
         }
 
         $productObj['product_name'] = $request->product_name;
-        $productObj['product_uniqueid'] = $request->product_uniqueid;
+        $productObj['product_uniqueid'] = $request->product_sku;
+        $productObj['product_sku'] = $request->product_sku;
         $productObj['product_description'] = $request->product_description;
         $productObj['product_price'] = $request->product_price;
         $productObj['product_selling_price'] = $request->product_selling_price;

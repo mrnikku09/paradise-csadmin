@@ -49,8 +49,8 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Product SKU</label>
-                                            <input type="text" class="form-control required @error('product_uniqueid') is-invalid @enderror" placeholder="Site Title" id="product_uniqueid_id" value="{{ isset($productIdData->product_uniqueid) && $productIdData->product_uniqueid != '' ? $productIdData->product_uniqueid : '' }}" name="product_uniqueid" />
-                                            @error('product_uniqueid')
+                                            <input type="text" class="form-control required @error('product_sku') is-invalid @enderror" placeholder="Product SKU" id="product_sku_id" value="{{ isset($productIdData->product_sku) && $productIdData->product_sku != '' ? $productIdData->product_sku : '' }}" name="product_sku" />
+                                            @error('product_sku')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ 'Product SKU is required' }}</strong>
                                             </span>
@@ -198,7 +198,7 @@
 </div>
 
 <script>
-    var allowedMimes = ["png", "jpg", "jpeg", "gif"]; //allowed image mime types
+    var allowedMimes = ["png", "jpg", "jpeg", "gif",'webp']; //allowed image mime types
     var maxMb = 2; //maximum allowed size (MB) of image
 
     function imageValidation(imageFile) {
@@ -258,9 +258,9 @@
 <!-- Product Price -->
 <script>
     function calcprice(e) {
-        var productMrp = parsefloat($('#product_price_id').val());
-        var productSelling = parsefloat($('#product_selling_price_id').val());
-        var productDiscount = parsefloat($('#product_discount_id').val());
+        var productMrp = parseFloat($('#product_price_id').val());
+        var productSelling = parseFloat($('#product_selling_price_id').val());
+        var productDiscount = parseFloat($('#product_discount_id').val());
         console.log(productMrp);
         console.log(productSelling);
         console.log(productDiscount);
