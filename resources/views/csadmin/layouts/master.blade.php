@@ -78,12 +78,14 @@
                             class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#"
-                            class="nav-link dropdown-toggle @php echo (isset($title) && $title == 'Product' ||$title == 'Add Product')?'active':'' @endphp"
+                            class="nav-link dropdown-toggle @php echo (isset($title) && $title == 'Product' ||$title == 'Add Product'||$title == 'Category')?'active':'' @endphp"
                             data-bs-toggle="dropdown"><i class="ri-shopping-cart-line me-2"></i>Product</a>
                         <div
-                            class="dropdown-menu bg-transparent border-0 @php echo (isset($title) && $title == 'Product' ||$title == 'Add Product')?'show':'' @endphp">
+                            class="dropdown-menu bg-transparent border-0 @php echo (isset($title) && $title == 'Product' ||$title == 'Add Product'||$title == 'Category')?'show':'' @endphp">
                             <a href="{{ route('csadmin.product.index') }}" class="dropdown-item @php echo (isset($title) && $title == 'Product')?'active':'' @endphp">Product</a>
                             <a href="{{ route('csadmin.product.addproduct') }}" class="dropdown-item @php echo (isset($title) && $title == 'Add Product')?'active':'' @endphp">Add Product</a>
+                            <a href="{{ route('csadmin.product.category') }}" class="dropdown-item @php echo (isset($title) && $title == 'Category')?'active':'' @endphp">Category</a>
+
                         </div>
                     </div>
                     <div class="nav-item dropdown">
@@ -100,6 +102,18 @@
                                 class="dropdown-item @php echo (isset($title) && $title == 'Footer')?'active':'' @endphp">Footer</a>
                         </div>
                     </div>
+                    
+                    <a href="{{ route('csadmin.media') }}"
+                        class="nav-item nav-link @php echo (isset($title) && $title == 'Media'||$title == "Add Media")?'active':'' @endphp"><i
+                            class="ri-image-2-line me-2" ></i>Media</a>
+                            
+                            <a href="{{ route('csadmin.ourteam.ourteam') }}"
+                        class="nav-item nav-link @php echo (isset($title) && $title == 'Our Team'||$title == "Add Team")?'active':'' @endphp"><i
+                            class="ri-team-line me-2" ></i>Our Team</a>
+                            
+                    <a href="{{ route('csadmin.faq.faq') }}"
+                        class="nav-item nav-link @php echo (isset($title) && $title == 'FAQ'||$title == "Add FAQ")?'active':'' @endphp"><i
+                            class="ri-question-answer-line me-2"></i>FAQ</a>
                     <div class="nav-item dropdown">
                         <a href="#"
                             class="nav-link dropdown-toggle @php echo (isset($title) && $title == 'Contact' )?'active':'' @endphp"
@@ -112,17 +126,10 @@
                             
                         </div>
                     </div>
-                    <a href="{{ route('csadmin.page.page') }}"
+
+<a href="{{ route('csadmin.page.page') }}"
                         class="nav-item nav-link @php echo (isset($title) && $title == 'Page'||$title == "Add Page")?'active':'' @endphp"><i
                             class="ri-pages-line me-2"></i>Pages</a>
-                    <a href="{{ route('csadmin.faq.faq') }}"
-                        class="nav-item nav-link @php echo (isset($title) && $title == 'FAQ'||$title == "Add FAQ")?'active':'' @endphp"><i
-                            class="ri-question-answer-line me-2"></i>FAQ</a>
-                    <a href="{{ route('csadmin.media') }}"
-                        class="nav-item nav-link @php echo (isset($title) && $title == 'Media'||$title == "Add Media")?'active':'' @endphp"><i
-                            class="ri-image-2-line me-2" ></i>Media</a>
-
-
                     <div class="nav-item dropdown">
                         <a href="#"
                             class="nav-link dropdown-toggle @php echo (isset($title) && $title == 'Site Setting')?'active':'' @endphp"

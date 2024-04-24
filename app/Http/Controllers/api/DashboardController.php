@@ -14,11 +14,13 @@ use App\Models\CsProduct;
 
 use App\Models\CsAppearanceMenu;
 use App\Models\CsAppearanceSlider;
+use App\Models\CsCategory;
 
 use App\Models\CsFooter;
 use App\Models\CsFaq;
 
 use App\Models\CsPages;
+use App\Models\CsOurTeams;
 use App\Models\CsContacts;
 
 use App\Models\CsThemeAdmin;
@@ -112,7 +114,7 @@ class DashboardController extends Controller
 
     public function sliderbanner()
     {
-        $sliderData=CsAppearanceSlider::orderBy('slider_id','ASC')->where('slider_status',1)->get();
+        $sliderData=CsAppearanceSlider::orderBy('slider_id','ASC')->where('slider_status',1)->select('slider_id','slider_name','slider_position','slider_image','slider_status')->get();
         $sliderImage=env('SLIDER_IMAGE');
         return response(["status" => 'success','SLIDER_IMAGE_PATH'=>$sliderImage ,"sliderData" => $sliderData], 201);
 
@@ -124,11 +126,25 @@ class DashboardController extends Controller
 
     }
 
-    public function product()
+    public function product(Request $request)
     {
+        $productData=null;
+        $categorywiseproduct=null;
+        $featuredProduct=CsProduct::orderBy('product_id','ASC')->where('product_status',1)->where('product_featured',1)->get();
+        if($request->type=='all')
+        {
          $productData=CsProduct::orderBy('product_id','ASC')->where('product_status',1)->get();
+        }else{
+            if($request->cat_slug)
+            {
+                $category=CsCategory::where('cat_slug',$request->cat_slug)->first();
+                $categorywiseproduct=CsProduct::where('product_status', 1)->whereRaw("FIND_IN_SET(?,product_category_id)",$category->cat_id)->get();
+            }else{
+            $productData=CsProduct::orderBy('product_id','ASC')->where('product_status',1)->get();
+            }
+        }
         $productImage=env('PRODUCT_IMAGE');
-        return response(["status" => 'success','PRODUCT_IMAGE_PATH'=>$productImage ,"productData" => $productData], 201);
+        return response(["status" => 'success','PRODUCT_IMAGE_PATH'=>$productImage ,'featuredProduct'=>$featuredProduct,'catergorywiseproduct'=>$categorywiseproduct,"productData" => $productData], 201);
     }
 
     public function productDetails(Request $request)
@@ -142,7 +158,7 @@ class DashboardController extends Controller
             return response(["status" => 'error', "message" => 'Product is not available'], 201);
         }
 
-        $productDetails=CsProduct::where('product_status',1)->where('product_slug',$request->product_slug)->first();
+        $productDetails=CsProduct::where('product_status',1)->where('product_slug',$request->product_slug)->select('product_id','product_uniqueid','product_name','product_content','product_description','product_sku','product_featured','product_price','product_selling_price','product_discount','product_slug','product_moq','product_image','product_status','product_highlight','product_meta_title','product_meta_keyword','product_meta_desc','product_rating')->first();
         $productImage=env('PRODUCT_IMAGE');
         if($productDetails)
         {
@@ -151,6 +167,27 @@ class DashboardController extends Controller
         }else{            
             return response(["status" => 'error', 'message'=>'somthing went wrong'], 201);
         }
+    }
+
+    public function category()
+    {
+        $categoryData=CsCategory::orderBy('cat_id','ASC')->where('cat_status',1)->get();
+        return response(["status" => 'success',"categoryData" => $categoryData], 201);
+    }
+    
+    public function categorywiseproduct(Request $request)
+    {
+        $category=CsCategory::where('cat_slug',$request->cat_slug)->first();
+
+        $categorywiseproduct=CsProduct::where('product_status', 1)->whereRaw("FIND_IN_SET(?,product_category_id)",$category->cat_id)->get();
+        return response(["status" => 'success',"categoryData" => $categorywiseproduct], 201);
+    }
+    
+    public function featuredourteam()
+    {
+        $teamData=CsOurTeams::where('team_status',1)->where('team_featured',1)->orderBy('team_id','ASC')->get();
+        $teamImage=env('OURTEAM_IMAGE');
+        return response(["status" => 'success','TEAM_IMAGE'=>$teamImage,"teamData" => $teamData], 201);
     }
 
 }

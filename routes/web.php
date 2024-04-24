@@ -59,10 +59,25 @@ Route::group(['namespace' => 'csadmin'], function () {
 			Route::any('add-product-checkslug', [App\Http\Controllers\csadmin\ProductController::class, 'addproductcheckslug'])->name('csadmin.product.checkslug');
 			Route::any('delete-product/{id}', [App\Http\Controllers\csadmin\ProductController::class, 'deleteproduct'])->name('csadmin.product.deleteproduct');
 			Route::any('product-status/{id}', [App\Http\Controllers\csadmin\ProductController::class, 'productstatus'])->name('csadmin.product.productstatus');
+			Route::get('checkfeatured/{id?}', [App\Http\Controllers\csadmin\ProductController::class, 'checkfeatured'])->name('csadmin.product.checkfeatured');
+
+			Route::get('category/{id?}', [App\Http\Controllers\csadmin\ProductController::class, 'category'])->name('csadmin.product.category');
+			Route::post('add-category-process/{id?}', [App\Http\Controllers\csadmin\ProductController::class, 'addcategoryprocess'])->name('csadmin.category.addcategoryprocess');
+			Route::any('category-status/{id}', [App\Http\Controllers\csadmin\ProductController::class, 'categorystatus'])->name('csadmin.category.categorystatus');
+			Route::any('delete-category/{id}', [App\Http\Controllers\csadmin\ProductController::class, 'deletecategory'])->name('csadmin.category.deletecategory');
 
 
 
 		});
+
+		/** OurTeamController **/
+		Route::any('/ourteam', [App\Http\Controllers\csadmin\OurteamController::class, 'ourteam'])->name('csadmin.ourteam.ourteam');
+		Route::any('ourteam/addteam/{id?}', [App\Http\Controllers\csadmin\OurteamController::class, 'addteam'])->name('csadmin.ourteam.addteam');
+		Route::any('ourteam/teamProcess/{id?}', [App\Http\Controllers\csadmin\OurteamController::class, 'teamProcess'])->name('csadmin.ourteam.teamProcess');
+		Route::any('ourteam/deleteteam/{id}', [App\Http\Controllers\csadmin\OurteamController::class, 'deleteteam'])->name('csadmin.ourteam.deleteteam');
+		Route::any('ourteam/statusteam/{id}', [App\Http\Controllers\csadmin\OurteamController::class, 'statusteam'])->name('csadmin.ourteam.statusteam');
+		Route::any('ourteam/teamfeatured/{id}', [App\Http\Controllers\csadmin\OurteamController::class, 'teamfeatured'])->name('csadmin.ourteam.teamfeatured');
+
 
 		/** MediaController **/
 		Route::any('/media', [App\Http\Controllers\csadmin\MediaController::class, 'media'])->name('csadmin.media');

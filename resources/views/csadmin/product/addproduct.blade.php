@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Product SKU</label>
+                                            <label class="form-label">Product SKU <span style="color: red;">*</span></label>
                                             <input type="text" class="form-control required @error('product_sku') is-invalid @enderror" placeholder="Product SKU" id="product_sku_id" value="{{ isset($productIdData->product_sku) && $productIdData->product_sku != '' ? $productIdData->product_sku : '' }}" name="product_sku" />
                                             @error('product_sku')
                                             <span class="invalid-feedback" role="alert">
@@ -88,20 +88,20 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="mb-3">
-                                            <label class="form-label">Product Price</label>
-                                            <input type="number" min=0 class="form-control  @error('product_selling_price') is-invalid @enderror" placeholder="0" onchange="calcprice(this.value)" id="product_selling_price_id" value="{{ isset($productIdData->product_selling_price) && $productIdData->product_selling_price != '' ? $productIdData->product_selling_price : '' }}" name="product_selling_price" />
+                                            <label class="form-label">Product Price <span style="color: red;">*</span></label>
+                                            <input type="number" min=0 class="form-control required @error('product_selling_price') is-invalid @enderror" placeholder="0" onchange="calcprice(this.value)" id="product_selling_price_id" value="{{ isset($productIdData->product_selling_price) && $productIdData->product_selling_price != '' ? $productIdData->product_selling_price : '' }}" name="product_selling_price" />
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="mb-3">
-                                            <label class="form-label">Product Discount</label>
-                                            <input type="number" min=0 class="form-control  @error('product_discount') is-invalid @enderror" readonly placeholder="0" id="product_discount_id" value="{{ isset($productIdData->product_discount) && $productIdData->product_discount != '' ? $productIdData->product_discount : '' }}" name="product_discount" />
+                                            <label class="form-label">Product Discount <span style="color: red;">*</span></label>
+                                            <input type="number" min=0 class="form-control required  @error('product_discount') is-invalid @enderror" readonly placeholder="0" id="product_discount_id" value="{{ isset($productIdData->product_discount) && $productIdData->product_discount != '' ? $productIdData->product_discount : '' }}" name="product_discount" />
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="mb-3">
-                                            <label class="form-label">Product Quantity </label>
-                                            <input type="number" min=0 class="form-control  @error('product_moq') is-invalid @enderror" placeholder="0" id="product_moq_id" value="{{ isset($productIdData->product_moq) && $productIdData->product_moq != '' ? $productIdData->product_moq : '' }}" name="product_moq" />
+                                            <label class="form-label">Product Quantity <span style="color: red;">*</span></label>
+                                            <input type="number" min=0 class="form-control required  @error('product_moq') is-invalid @enderror" placeholder="0" id="product_moq_id" value="{{ isset($productIdData->product_moq) && $productIdData->product_moq != '' ? $productIdData->product_moq : '' }}" name="product_moq" />
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3">
                                         <label class="form-label">Product Meta Title: <span style="color: red;">*</span></label>
-                                        <input type="text" class="form-control required @error('product_meta_title') is-invalid @enderror" placeholder="Page Meta Title" id="product_meta_title_id" name="product_meta_title" value="@if (isset($productIdData->product_meta_title)) {{ $productIdData->product_meta_title }} @endif" />
+                                        <input type="text" class="form-control required @error('product_meta_title') is-invalid @enderror" placeholder="Product Meta Title" id="product_meta_title_id" name="product_meta_title" value="@if (isset($productIdData->product_meta_title)) {{ $productIdData->product_meta_title }} @endif" />
                                         @error('product_meta_title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ 'Page Url Address is required' }}</strong>
@@ -131,13 +131,13 @@
                                 <div class="col-lg-12">
                                     <div class="mb-3">
                                         <label class="form-label">Product Meta Keyword: </label>
-                                        <input type="text" class="form-control" placeholder="Page Meta Keyword" name="product_meta_keyword" id="product_meta_keyword_id" value="@if (isset($productIdData->product_meta_keyword)) {{ $productIdData->product_meta_keyword }} @endif" />
+                                        <input type="text" class="form-control" placeholder="Product Meta Keyword" name="product_meta_keyword" id="product_meta_keyword_id" value="@if (isset($productIdData->product_meta_keyword)) {{ $productIdData->product_meta_keyword }} @endif" />
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="mb-3">
                                         <label class="form-label">Product Meta Description:</label>
-                                        <input type="text" class="form-control" placeholder="Page Meta Desc" value="@if (isset($productIdData->product_meta_desc)) {{ $productIdData->product_meta_desc }}@else{{ '' }} @endif" name="product_meta_desc" id="product_meta_desc_id" />
+                                        <input type="text" class="form-control" placeholder="Page Meta Desc" value="@if (isset($productIdData->product_meta_desc)) {{ $productIdData->product_meta_desc }}@else{{ '' }} @endif" name="product_meta_desc" id="product_meta_desc_id" placeholder="Product Meta Description"/>
                                     </div>
                                 </div>
                             </div>
@@ -164,6 +164,42 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card bg-secondary rounded p-2 mb-2">
+						<div class="card-header">
+							<h5>Category</h5> </div>
+						<div class="card-body justify-content-sm-center bordered">
+                        <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                                <p style="line-height: 20px;"><small class="text-muted">Select category in which you want to display this blog. You can also select multiple categories for this blog.</small></p>
+                                                <div style="height: 250px; overflow-x: hidden; border: 1px solid #5d5959; padding: 10px; background: #414141;"> 
+                                                @if(count($categoryData)>0)
+                                                @php
+                                                $strCategory = array();
+                                                if(isset($productIdData->product_category_id))
+                                                {
+                                                    $strCategory = explode(',',$productIdData->product_category_id);
+                                                }
+                                                $counter=1
+                                                @endphp
+                                            @foreach($categoryData as $data)
+                                            @php $count=$counter++; @endphp
+                                            <div class="form-check form-check-inline" style="width: 100%; margin-bottom: 10px;margin-left:0px; cursor:pointer;">
+                                            <input class="form-check-input categorychcked" @if(in_array($data->cat_id,$strCategory)) {{'checked="checked"'}} @endif style="cursor:pointer;" type="checkbox" id="inlineCheckbox{{$count}}" value="{{$data->cat_id}}" name="category_id[]">
+                                            <label class="form-check-label" style="cursor:pointer;" for="inlineCheckbox{{$count}}">{{$data->cat_name}}</label>
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                               <a href="{{route('csadmin.product.category')}}"> <span><i class="ri-add-line me-2"></i></span> Add Category</a>
+                            </div>
+                            </div>
+						</div>
+						<!-- <div class="card-footer"> <a href="https://bybv.in/csadmin/category" target="_blank">+ Add New Category</a> </div> -->
+					</div>
                         <div class="card bg-secondary rounded p-2 mb-2">
                             <div class="card-header">
                                 <div class="row align-items-center gy-3">
@@ -238,6 +274,32 @@
         );
     })
 
+    
+</script>
+
+<!-- Product Price -->
+<script>
+    function calcprice(e) {
+        var productMrp = parseFloat($('#product_price_id').val());
+        var productSelling = parseFloat($('#product_selling_price_id').val());
+        var productDiscount = parseFloat($('#product_discount_id').val());
+        console.log(productMrp);
+        console.log(productSelling);
+        console.log(productDiscount);
+        if (productSelling === "" ||productSelling == 0) {
+            $('#product_discount_id').val('');
+            $('#product_selling_price_id').val('');
+        } else if (productSelling > productMrp) {
+            alert('MRP Must greater than Selling Price')
+            $('#product_discount_id').val('');
+            $('#product_selling_price_id').val('');
+        } else {
+            $('#product_discount_id').val(productMrp - productSelling);
+            $('#product_selling_price_id').val(productSelling);
+        }
+    }
+</script>
+<script>
     function checkvalidation(value) {
         var elementsselect = document.querySelectorAll('.required');
         var counter = 0;
@@ -251,28 +313,6 @@
         }
         if (counter == 0) {
             $('#formsubmit').submit();
-        }
-    }
-</script>
-
-<!-- Product Price -->
-<script>
-    function calcprice(e) {
-        var productMrp = parseFloat($('#product_price_id').val());
-        var productSelling = parseFloat($('#product_selling_price_id').val());
-        var productDiscount = parseFloat($('#product_discount_id').val());
-        console.log(productMrp);
-        console.log(productSelling);
-        console.log(productDiscount);
-        if (productSelling === "") {
-            $('#product_discount_id').val(productMrp);
-            $('#product_selling_price_id').val('');
-        } else if (productSelling > productMrp) {
-            alert('MRP Must greater than Selling Price')
-            $('#product_selling_price_id').val('');
-        } else {
-            $('#product_discount_id').val(productMrp - productSelling);
-            $('#product_selling_price_id').val(productSelling);
         }
     }
 </script>
