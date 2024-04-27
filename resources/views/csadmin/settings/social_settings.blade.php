@@ -20,7 +20,7 @@
         @include('csadmin.elements.message')
         <div class="row">
             <div class="col-12">
-				<div class="card">
+				<div class="card bg-dark">
 					<div class="card-header">
 						<div class="row align-items-center gy-3">
 							<div class="col-sm">
@@ -28,7 +28,7 @@
 							</div> 
 						</div>
 					</div>  
-					<form method="post" action="{{route('csadmin.setting.socialsettingprocess')}}">
+					<form method="post" action="{{route('csadmin.settings.socialsettingprocess')}}">
 						@csrf
 						<div class="card-body justify-content-sm-center">
 							<div class="row">
@@ -64,8 +64,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="card-footer bg-white d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary">Update</button>
+						<div class="card-footer bg-dark d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success">Update</button>
                         </div>
 					</form>
 				</div>

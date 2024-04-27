@@ -114,6 +114,9 @@
                     <a href="{{ route('csadmin.faq.faq') }}"
                         class="nav-item nav-link @php echo (isset($title) && $title == 'FAQ'||$title == "Add FAQ")?'active':'' @endphp"><i
                             class="ri-question-answer-line me-2"></i>FAQ</a>
+                    <a href="{{ route('csadmin.newsletter.newsletter') }}"
+                        class="nav-item nav-link @php echo (isset($title) && $title == 'NewsLetter')?'active':'' @endphp"><i
+                            class="ri-news-line me-2"></i>NewsLetter</a>
                     <div class="nav-item dropdown">
                         <a href="#"
                             class="nav-link dropdown-toggle @php echo (isset($title) && $title == 'Contact' )?'active':'' @endphp"
@@ -132,12 +135,15 @@
                             class="ri-pages-line me-2"></i>Pages</a>
                     <div class="nav-item dropdown">
                         <a href="#"
-                            class="nav-link dropdown-toggle @php echo (isset($title) && $title == 'Site Setting')?'active':'' @endphp"
+                            class="nav-link dropdown-toggle @php echo (isset($title) && $title == 'Site Setting' || $title == 'Social Settings' )?'active':'' @endphp"
                             data-bs-toggle="dropdown"><i class="ri-settings-line me-2"></i>Settings</a>
                         <div
-                            class="dropdown-menu bg-transparent border-0 @php echo (isset($title) && $title == 'Site Setting')?'show':'' @endphp">
+                            class="dropdown-menu bg-transparent border-0 @php echo (isset($title) && $title == 'Site Setting' || $title == 'Social Settings')?'show':'' @endphp">
                             <a href="{{ route('csadmin.settings.sitesetting') }}"
                                 class="dropdown-item @php echo (isset($title) && $title == 'Site Setting')?'active':'' @endphp">Site
+                                Setting</a>
+                            <a href="{{ route('csadmin.settings.socialsetting') }}"
+                                class="dropdown-item @php echo (isset($title) && $title == 'Social Settings')?'active':'' @endphp">Social
                                 Setting</a>
                         </div>
                     </div>

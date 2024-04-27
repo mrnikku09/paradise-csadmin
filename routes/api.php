@@ -27,4 +27,5 @@ use Illuminate\Support\Facades\Route;
     Route::post('/product-details', [App\Http\Controllers\api\DashboardController::class, 'productDetails']);
     Route::get('/category', [App\Http\Controllers\api\DashboardController::class, 'category']);
         Route::any('/category-wise-product', [App\Http\Controllers\api\DashboardController::class, 'categorywiseproduct']);
+        Route::any('/newsletter', [App\Http\Controllers\api\DashboardController::class, 'newsletter']);
 
