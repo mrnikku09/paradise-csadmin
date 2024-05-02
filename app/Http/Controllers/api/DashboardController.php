@@ -27,6 +27,7 @@ use App\Models\CsProduct;
 
 
 use App\Models\CsAppearanceMenu;
+use Illuminate\Support\Collection;
 
 use App\Models\CsAppearanceSlider;
 
@@ -250,11 +251,11 @@ class DashboardController extends Controller
 
         $categorywiseproduct = null;
 
-        $featuredProduct = CsProduct::orderBy('product_id', 'ASC')->where('product_status', 1)->where('product_featured', 1)->get();
+        $featuredProduct = CsProduct::orderBy('product_id', 'DESC')->where('product_status', 1)->where('product_featured', 1)->get();
 
         if ($request->type == 'all') {
 
-            $productData = CsProduct::orderBy('product_id', 'ASC')->where('product_status', 1)->get();
+            $productData = CsProduct::orderBy('product_id', 'DESC')->where('product_status', 1)->get();
 
         } else {
 
@@ -266,7 +267,7 @@ class DashboardController extends Controller
 
             } else {
 
-                $productData = CsProduct::orderBy('product_id', 'ASC')->where('product_status', 1)->get();
+                $productData = CsProduct::orderBy('product_id', 'DESC')->where('product_status', 1)->get();
 
             }
 
@@ -298,30 +299,30 @@ class DashboardController extends Controller
         }
 
 
-        $relproduct=[];
-        $productIdData=CsProduct::where('product_status', 1)->where('product_slug', $request->product_slug)->first();
+        $relproduct = [];
+        $productIdData = CsProduct::where('product_status', 1)->where('product_slug', $request->product_slug)->first();
         // return $request->all();
         $categoryIds = explode(',', $productIdData->product_category_id);
-         $relproduct = CsProduct::where('product_status', 1)
-        ->where(function ($query) use ($categoryIds) {
-            foreach ($categoryIds as $categoryId) {
-                $query->orWhereRaw('FIND_IN_SET(?, product_category_id)', [$categoryId]);
-            }
-        })->limit(10)
-        ->get();
+        $relproduct = CsProduct::where('product_status', 1)
+            ->where(function ($query) use ($categoryIds) {
+                foreach ($categoryIds as $categoryId) {
+                    $query->orWhereRaw('FIND_IN_SET(?, product_category_id)', [$categoryId]);
+                }
+            })->limit(10)
+            ->get();
 
         // return $relproduct=CsProduct::where('product_status',1)->whereRaw("FIND_IN_SET(?,product_category_id)",explode(',',$productIdData->product_category_id))->get();
 
         // return $productIdData=CsProduct::where('product_status', 1)->where('product_slug', $request->product_slug)->pluck('product_category_id')->toArray();
 
 
-        $productDetails = CsProduct::where('product_status', 1)->where('product_slug', $request->product_slug)->select('product_id', 'product_uniqueid', 'product_name', 'product_content', 'product_description', 'product_sku', 'product_featured', 'product_price', 'product_selling_price', 'product_discount', 'product_slug', 'product_moq', 'product_image', 'product_status','product_category_id','product_category_name', 'product_highlight', 'product_meta_title', 'product_meta_keyword', 'product_meta_desc', 'product_rating')->first();
+        $productDetails = CsProduct::where('product_status', 1)->where('product_slug', $request->product_slug)->select('product_id', 'product_uniqueid', 'product_name', 'product_content', 'product_description', 'product_sku', 'product_featured', 'product_price', 'product_selling_price', 'product_discount', 'product_slug', 'product_moq', 'product_image', 'product_status', 'product_category_id', 'product_category_name', 'product_highlight', 'product_meta_title', 'product_meta_keyword', 'product_meta_desc', 'product_rating')->first();
 
         $productImage = env('PRODUCT_IMAGE');
 
         if ($productDetails) {
 
-            return response()->json(["status" => 'success', 'PRODUCT_IMAGE_PATH' => $productImage,'relProduct'=>$relproduct, "productDetails" => $productDetails], 201);
+            return response()->json(["status" => 'success', 'PRODUCT_IMAGE_PATH' => $productImage, 'relProduct' => $relproduct, "productDetails" => $productDetails], 201);
 
 
 
@@ -338,7 +339,7 @@ class DashboardController extends Controller
     public function category()
     {
 
-        $categoryData = CsCategory::orderBy('cat_id', 'ASC')->where('cat_status', 1)->get();
+        $categoryData = CsCategory::orderBy('cat_id', 'DESC')->where('cat_status', 1)->get();
 
         return response()->json(["status" => 'success', "categoryData" => $categoryData], 201);
 
@@ -349,14 +350,26 @@ class DashboardController extends Controller
     public function categorywiseproduct(Request $request)
     {
 
-        $category = CsCategory::where('cat_slug', $request->cat_slug)->first();
+		 $resCategoryData = CsCategory::where('cat_status', 1)->orderBy('cat_id','desc')->get();
+         $productImage = env('PRODUCT_IMAGE');
 
+        foreach($resCategoryData as $value)
+        {
+            $categoryId=$value->cat_id;
 
-
-        $categorywiseproduct = CsProduct::where('product_status', 1)->whereRaw("FIND_IN_SET(?,product_category_id)", $category->cat_id)->get();
-
-        return response()->json(["status" => 'success', "categoryData" => $categorywiseproduct], 201);
-
+            $value->product=CsProduct::where('product_status', 1)
+            ->orderBy('product_id','DESC')
+            ->whereRaw("FIND_IN_SET(?, product_category_id)", [$categoryId])
+            ->limit(10)
+            ->get();
+        }
+        // return $resCategoryData;
+        return response()->json([
+			'status' => 'success',
+			'message' => 'Data fetched successfully',
+            'PRODUCT_IMAGE_PATH' => $productImage,
+			'categoryData' => $resCategoryData,
+		], 200);
     }
 
 
