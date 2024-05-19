@@ -249,7 +249,7 @@
                         <div
                             class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <p class="text-center">Welcome Paradise</p>
-                            <a href="{{ route('csadmin.adminLogout') }}" class="dropdown-item"><i
+                            <a href="{{ route('csadmin.adminLogout') }}" onclick="return confirm('You Want to Logout?')" class="dropdown-item"><i
                                     class="ri-logout-box-r-line me-2"></i>Log Out</a>
                         </div>
                     </div>

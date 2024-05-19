@@ -422,4 +422,26 @@ class DashboardController extends Controller
         }
     }
 
+    function searchwiseproduct(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'seachval' => 'required',
+
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['status' => 'error', 'message' => 'Please Fill Required Field'], 203);
+            }
+            $productImage=env('PRODUCT_IMAGE');
+            $seacrhwiseproduct=CsProduct::where('product_status',1)->where('product_name', 'LIKE', '%' . $request->seachval . '%')->select('product_id','product_name','product_slug','product_image')->limit(5)->get();
+            $categorywiseproduct=CsCategory::where('cat_status',1)->where('cat_name', 'LIKE', '%' . $request->seachval . '%')->limit(5)->get();
+
+          return response()->json(["status" => 'success', 'PRODUCT_IMAGE_PATH' => $productImage, 'product' => $seacrhwiseproduct, 'catergory' => $categorywiseproduct], 201);
+
+            
+        }
+    }
+ 
+
 }
