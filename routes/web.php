@@ -56,7 +56,7 @@ Route::group(['namespace' => 'csadmin'], function () {
 
 			Route::get('menu-delete/{id?}', [App\Http\Controllers\csadmin\AppearenceController::class, 'deletemenu'])->name('csadmin.appearence.deletemenu');
 
-			
+
 
 			Route::get('slider/', [App\Http\Controllers\csadmin\AppearenceController::class, 'slider'])->name('csadmin.appearence.slider');
 
@@ -80,33 +80,33 @@ Route::group(['namespace' => 'csadmin'], function () {
 
 		});
 
-		
+
 
 		// Faq Controller
 
 		Route::get('faq/', [App\Http\Controllers\csadmin\FaqController::class, 'faq'])->name('csadmin.faq.faq');
 
-			Route::get('add-faq/{id?}', [App\Http\Controllers\csadmin\FaqController::class, 'addfaq'])->name('csadmin.faq.addfaq');
+		Route::get('add-faq/{id?}', [App\Http\Controllers\csadmin\FaqController::class, 'addfaq'])->name('csadmin.faq.addfaq');
 
-			Route::post('faq-process/{id?}', [App\Http\Controllers\csadmin\FaqController::class, 'faqProcess'])->name('csadmin.faq.faqProcess');
+		Route::post('faq-process/{id?}', [App\Http\Controllers\csadmin\FaqController::class, 'faqProcess'])->name('csadmin.faq.faqProcess');
 
-			Route::get('faq-delete/{id?}', [App\Http\Controllers\csadmin\FaqController::class, 'faqDelete'])->name('csadmin.faq.faqDelete');
+		Route::get('faq-delete/{id?}', [App\Http\Controllers\csadmin\FaqController::class, 'faqDelete'])->name('csadmin.faq.faqDelete');
 
-			Route::get('faq-status/{id?}', [App\Http\Controllers\csadmin\FaqController::class, 'faqstatus'])->name('csadmin.faq.faqstatus');
+		Route::get('faq-status/{id?}', [App\Http\Controllers\csadmin\FaqController::class, 'faqstatus'])->name('csadmin.faq.faqstatus');
 
-			
 
-			// Enquiry Controller
 
-			Route::get('contact-us', [App\Http\Controllers\csadmin\EnquiryController::class, 'index'])->name('csadmin.enquiry.contact');
+		// Enquiry Controller
 
-			Route::get('contact-us-delete/{id?}', [App\Http\Controllers\csadmin\EnquiryController::class, 'contactDelete'])->name('csadmin.enquiry.contactDelete');
+		Route::get('contact-us', [App\Http\Controllers\csadmin\EnquiryController::class, 'index'])->name('csadmin.enquiry.contact');
 
-			// Newsletter Controller
+		Route::get('contact-us-delete/{id?}', [App\Http\Controllers\csadmin\EnquiryController::class, 'contactDelete'])->name('csadmin.enquiry.contactDelete');
 
-			Route::get('news-letter', [App\Http\Controllers\csadmin\NewsLetterController::class, 'index'])->name('csadmin.newsletter.newsletter');
+		// Newsletter Controller
 
-			Route::get('newsletter-delete/{id?}', [App\Http\Controllers\csadmin\NewsLetterController::class, 'newsletterdelete'])->name('csadmin.newsletter.newsletterdelete');
+		Route::get('news-letter', [App\Http\Controllers\csadmin\NewsLetterController::class, 'index'])->name('csadmin.newsletter.newsletter');
+
+		Route::get('newsletter-delete/{id?}', [App\Http\Controllers\csadmin\NewsLetterController::class, 'newsletterdelete'])->name('csadmin.newsletter.newsletterdelete');
 
 
 
